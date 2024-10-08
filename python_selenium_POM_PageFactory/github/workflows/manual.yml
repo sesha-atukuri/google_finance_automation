@@ -1,0 +1,30 @@
+name: Manual Run
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9.2'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run tests
+        run: |
+#         execute this for running full tests
+          pytest      
+          
+#          execute this to run test case 5 and 6 from the problem
+          pytest -v -s -k "test_print_stock_symbols_extra_in_retrieved"
+          pytest -v -s -k "test_print_stock_symbols_missing_in_retrieve_list"
